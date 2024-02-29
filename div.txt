@@ -1,0 +1,41 @@
+class Bookstore:
+    def __init__(self):
+        self.inventory = {}
+
+    def add_book(self, title, author, quantity, price):
+        if title in self.inventory:
+            print("Book already exists in inventory.")
+        else:
+            self.inventory[title] = {'author': author, 'quantity': quantity, 'price': price}
+            print("Book added to inventory.")
+
+    def sell_book(self, title, quantity):
+        if title not in self.inventory:
+            print("Book not found in inventory.")
+        elif self.inventory[title]['quantity'] < quantity:
+            print("Not enough stock available.")
+        else:
+            self.inventory[title]['quantity'] -= quantity
+            print("Sale successful.")
+
+    def display_inventory(self):
+        print("Current Inventory:")
+        for title, book_info in self.inventory.items():
+            print(f"Title: {title}, Author: {book_info['author']}, Quantity: {book_info['quantity']}, Price: ${book_info['price']}")
+
+def main():
+    bookstore = Bookstore()
+
+    bookstore.add_book("Harry Potter", "J.K. Rowling", 50, 10.99)
+    bookstore.add_book("Lord of the Rings", "J.R.R. Tolkien", 30, 12.99)
+    bookstore.add_book("Python Programming", "Guido van Rossum", 20, 29.99)
+
+    bookstore.display_inventory()
+
+    bookstore.sell_book("Harry Potter", 5)
+    bookstore.sell_book("Lord of the Rings", 10)
+
+    bookstore.display_inventory()
+
+if __name__ == "__main__":
+    main()
